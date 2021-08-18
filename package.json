@@ -1,8 +1,10 @@
 {
   "name": "@fluxprotocol/oracle-provider-core",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Core components for the Flux Oracle",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "jest",
     "release": "npm run build && standard-version",
