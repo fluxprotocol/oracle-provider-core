@@ -3,7 +3,7 @@ import Big from 'big.js';
 class Balance {
     public balance: Big = new Big(0);
     public staked: Big = new Big(0);
-    public claimed: Big = new Big(0);
+    public profit: Big = new Big(0);
 
     constructor(public symbol: string, public decimals: number, public contractId: string) {}
 
@@ -31,11 +31,8 @@ class Balance {
         return false;
     }
 
-    public addClaimed(amount: string) {
-        this.deposit(amount);
-        
-        this.staked = this.staked.sub(amount);
-        this.claimed = this.claimed.add(amount);
+    public addProfit(amount: string) {
+        this.profit = this.profit.add(amount);
     }
 
     public resetBalance(amount: string, symbol = "FLX", decimals = 18) {
