@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/fluxprotocol/oracle-provider-core#readme",
   "dependencies": {
-    "big.js": "^6.1.1"
+    "big.js": "^6.1.1",
+    "winston": "^3.3.3"
   }
 }
