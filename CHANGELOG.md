@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.3.0...v1.4.0) (2021-08-31)
+
+
+### Features
+
+* **request:** Add support for using balances when bond is too high ([9615cd7](https://github.com/fluxprotocol/oracle-provider-core/commit/9615cd7091b9b26aaf4a0b1a8597a4ec24bbeeab))
+
 ## [1.3.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.2.0...v1.3.0) (2021-08-31)
 
 
