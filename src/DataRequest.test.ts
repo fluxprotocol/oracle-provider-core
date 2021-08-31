@@ -7,6 +7,35 @@ import { toToken } from "./Token";
 
 describe('DataRequest', () => {
     describe('calcStakeAmount', () => {
+        
+        it('Should stake all the balance when the bond is too high', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '0',
+                    validityBond: '5000000000000000000000000'
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('3', 24), toToken('8', 24));
+
+            expect(amount).toBe('3000000000000000000000000');
+        });
+
+        it('Should stake half of the balance when the bond is too high and the divider is 0.5', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '0',
+                    validityBond: '5000000000000000000000000'
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('3', 24), toToken('8', 24), 0.5);
+
+            expect(amount).toBe('1500000000000000000000000');
+        });
+
         it('Should stake the correct amount when there is no windows', () => {
             const request = createDummyDataRequest({
                 resolutionWindows: [],
@@ -16,7 +45,7 @@ describe('DataRequest', () => {
                 },
             });
 
-            const amount = calcStakeAmount(request, toToken('8', 24));
+            const amount = calcStakeAmount(request, toToken('100', 24), toToken('8', 24));
 
             expect(amount).toBe('2000000000000000000000000');
         });
@@ -31,7 +60,7 @@ describe('DataRequest', () => {
                 },
             });
 
-            const amount = calcStakeAmount(request, toToken('8', 24));
+            const amount = calcStakeAmount(request, toToken('100', 24), toToken('8', 24));
 
             expect(amount).toBe('2100000000000000000000000');
         });
@@ -45,7 +74,7 @@ describe('DataRequest', () => {
                 },
             });
 
-            const amount = calcStakeAmount(request, toToken('8', 24));
+            const amount = calcStakeAmount(request, toToken('100', 24), toToken('8', 24));
 
             expect(amount).toBe('4000000000000000000000000');
         });
@@ -68,7 +97,7 @@ describe('DataRequest', () => {
                 },
             });
 
-            const amount = calcStakeAmount(request, toToken('8', 24));
+            const amount = calcStakeAmount(request, toToken('100', 24), toToken('8', 24));
 
             expect(amount).toBe('4000000000000000000000000');
         });
@@ -91,7 +120,7 @@ describe('DataRequest', () => {
                 },
             });
 
-            const amount = calcStakeAmount(request, toToken('3.5', 24));
+            const amount = calcStakeAmount(request, toToken('100', 24), toToken('3.5', 24));
 
             expect(amount).toBe('3500000000000000000000000');
         });

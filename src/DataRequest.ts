@@ -57,12 +57,29 @@ export function calcWindowBondSize(requestConfig: RequestConfig): string {
     return bond_size.mul(2).toString();
 }
 
-export function calcStakeAmount(request: DataRequest, maxAmount: string): string {
+/**
+ * Calculates the amount of stake that should be used for this request
+ *
+ * @export
+ * @param {DataRequest} request
+ * @param {string} balance The current amount of balance
+ * @param {string} maxAmount The maximum we can spend on a window
+ * @param {number} balanceDivider Divides the balance in smaller pieces so we can diversify our stake (percentage in 0.01 - 1)
+ * @return {string}
+ */
+export function calcStakeAmount(request: DataRequest, balance: string, maxAmount: string, balanceDivider: number = 1): string {
     const maxStakeAmount = new Big(maxAmount);
     const currentWindow = getCurrentResolutionWindow(request);
     const bondSize = new Big(currentWindow ? currentWindow.bondSize : calcWindowBondSize(request.config));
     
-    return clampBig(bondSize, new Big(1), maxStakeAmount).toString();
+    const stakeAmount = clampBig(bondSize, new Big(1), maxStakeAmount);
+
+    if (stakeAmount.gt(balance)) {
+        // Divides the stake in smaller chunks so we can diversify
+        return new Big(balance).mul(balanceDivider).round(0, 0).toString();
+    }
+
+    return stakeAmount.toString();
 }
 
 /**
