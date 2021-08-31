@@ -23,6 +23,11 @@ class Balance {
     }
 
     public stake(amount: string): boolean {
+        // You can't withdraw negative or 0
+        if (new Big(amount).lte(0)) {
+            return false;
+        }
+
         if (this.withdraw(amount)) {
             this.staked = this.staked.add(amount);
             return true;

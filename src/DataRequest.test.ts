@@ -7,6 +7,20 @@ import { toToken } from "./Token";
 
 describe('DataRequest', () => {
     describe('calcStakeAmount', () => {
+
+        it('Should give back 0 if the balance is 0', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '0',
+                    validityBond: '5000000000000000000000000'
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('0', 24), toToken('8', 24));
+
+            expect(amount).toBe('0');
+        });
         
         it('Should stake all the balance when the bond is too high', () => {
             const request = createDummyDataRequest({
