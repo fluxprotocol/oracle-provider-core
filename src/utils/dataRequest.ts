@@ -11,6 +11,11 @@ export default function createDummyDataRequest(request: Partial<DataRequest>): D
         resolutionWindows: request.resolutionWindows ?? [],
         sources: request.sources ?? [],
         staking: request.staking ?? [],
+        config: {
+            paidFee: '0',
+            validityBond: '0',
+            ...request.config,
+        },
         ...request,
     }
 }

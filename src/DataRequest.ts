@@ -1,12 +1,22 @@
+import Big from "big.js";
 import { DataRequestDataType } from "./DataRequestDataType";
 import { ExecuteResult } from "./ExecuteResult";
 import { getRequestOutcome, isOutcomesEqual, Outcome } from "./Outcome";
 import ResolutionWindow from "./ResolutionWindow";
 import { StakeError, SuccessfulStakeResult } from "./StakeResult";
+import clampBig from "./utils/clampBig";
+
+Big.PE = 100_000;
 
 export interface RequestInfo {
     end_point: string;
     source_path: string;
+}
+
+export interface RequestConfig {
+    validityBond: string;
+    paidFee: string;
+    stakeMultiplier?: number;
 }
 
 export default interface DataRequest {
@@ -22,12 +32,37 @@ export default interface DataRequest {
     finalizedOutcome?: Outcome;
     claimedAmount?: string;
     dataType: DataRequestDataType;
+    config: RequestConfig;
     metadata?: string;
     paidFee?: string;
 }
 
 export function getCurrentResolutionWindow(request: DataRequest) {
     return request.resolutionWindows[request.resolutionWindows.length - 1];
+}
+
+export function calcWindowBondSize(requestConfig: RequestConfig): string {
+    let bond_size = new Big(requestConfig.validityBond);
+
+    if (new Big(requestConfig.paidFee).gte(requestConfig.validityBond)) {
+        bond_size = new Big(requestConfig.paidFee);
+    }
+
+    // Use the multiplier according to multiply_stake in the oracle
+    if (requestConfig.stakeMultiplier) {
+        bond_size = bond_size.mul(requestConfig.stakeMultiplier).div(10_000).round(0);
+    }
+
+    // Multily by 2 according to ResolutionWindow::new in the oracle
+    return bond_size.mul(2).toString();
+}
+
+export function calcStakeAmount(request: DataRequest, maxAmount: string): string {
+    const maxStakeAmount = new Big(maxAmount);
+    const currentWindow = getCurrentResolutionWindow(request);
+    const bondSize = new Big(currentWindow ? currentWindow.bondSize : calcWindowBondSize(request.config));
+    
+    return clampBig(bondSize, new Big(1), maxStakeAmount).toString();
 }
 
 /**

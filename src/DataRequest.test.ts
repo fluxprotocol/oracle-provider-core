@@ -1,11 +1,102 @@
 import createDummyDataRequest from "./utils/dataRequest";
-import { isClaimResultSuccesful } from "./ClaimResult";
-import { getCurrentResolutionWindow, isRequestClaimable, isRequestDeletable, mergeRequests } from "./DataRequest";
+import { calcStakeAmount, getCurrentResolutionWindow, isRequestClaimable, isRequestDeletable, mergeRequests } from "./DataRequest";
 import { OutcomeType } from "./Outcome";
 import { StakeResultType } from "./StakeResult";
+import { toToken } from "./Token";
 
 
 describe('DataRequest', () => {
+    describe('calcStakeAmount', () => {
+        it('Should stake the correct amount when there is no windows', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '0',
+                    validityBond: '1000000000000000000000000'
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('8', 24));
+
+            expect(amount).toBe('2000000000000000000000000');
+        });
+
+        it('Should stake the correct amount when there is no windows and there is a multiplier', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '0',
+                    validityBond: '1000000000000000000000000',
+                    stakeMultiplier: 10_500, // 105%
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('8', 24));
+
+            expect(amount).toBe('2100000000000000000000000');
+        });
+
+        it('Should stake the correct amount when there is no windows and the paid fee is higher than the bond', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '2000000000000000000000000',
+                    validityBond: '1000000000000000000000000',
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('8', 24));
+
+            expect(amount).toBe('4000000000000000000000000');
+        });
+
+        it('Should stake the correct amount when there is 2 windows', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [{
+                    bondSize: toToken('2', 24),
+                    endTime: new Date(1),
+                    round: 0,
+                    bondedOutcome: { type: OutcomeType.Invalid },
+                }, {
+                    bondSize: toToken('4', 24),
+                    endTime: new Date(1),
+                    round: 0,
+                }],
+                config: {
+                    paidFee: '0',
+                    validityBond: toToken('1', 24),
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('8', 24));
+
+            expect(amount).toBe('4000000000000000000000000');
+        });
+
+        it('Should stake the correct amount when there is 2 windows but the stake is higher than the max', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [{
+                    bondSize: toToken('2', 24),
+                    endTime: new Date(1),
+                    round: 0,
+                    bondedOutcome: { type: OutcomeType.Invalid },
+                }, {
+                    bondSize: toToken('4', 24),
+                    endTime: new Date(1),
+                    round: 0,
+                }],
+                config: {
+                    paidFee: '0',
+                    validityBond: toToken('1', 24),
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('3.5', 24));
+
+            expect(amount).toBe('3500000000000000000000000');
+        });
+    });
+
     describe('getCurrentResolutionWindow', () => {
         it('should always return the latest resolutionWindow', () => {
             const request = createDummyDataRequest({
