@@ -8,6 +8,20 @@ import { toToken } from "./Token";
 describe('DataRequest', () => {
     describe('calcStakeAmount', () => {
 
+        it('Should stake a minimum of 1 if the config has a validity bond of 0', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [],
+                config: {
+                    paidFee: '0',
+                    validityBond: '0'
+                },
+            });
+
+            const amount = calcStakeAmount(request, toToken('10', 24), toToken('8', 24));
+
+            expect(amount).toBe('1');
+        });
+
         it('Should give back 0 if the balance is 0', () => {
             const request = createDummyDataRequest({
                 resolutionWindows: [],
