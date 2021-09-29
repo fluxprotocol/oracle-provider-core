@@ -30,6 +30,10 @@ export interface IProviderRegistry {
     claim(providerId: string, request: DataRequest): Promise<ClaimResult>;
 }
 
+export const DB_TABLE_DATA_REQUESTS = 'data_requests';
+export const DB_TABLE_SYNC = 'sync';
+export const DB_TABLE_BALANCES = 'balances';
+
 export interface IDatabase {
     startDatabase(dbPath: string, dbName: string): Promise<any>;
     createDocument(tableKey: string, id: string, obj: object): Promise<void>;

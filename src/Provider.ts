@@ -1,11 +1,16 @@
 import Balance from './Balance';
 import { ClaimResult } from './ClaimResult';
+import { IDatabase } from './Core';
 import DataRequest from './DataRequest';
 import { Outcome } from './Outcome';
 import { StakeResult } from './StakeResult';
 
 export interface EnvArgs {
     [key: string]: string | undefined;
+}
+
+export interface ProviderDependencies {
+    database: IDatabase;
 }
 
 export default interface Provider {

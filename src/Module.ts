@@ -10,7 +10,7 @@ export interface ModuleDependencies {
 }
 
 export default class Module {
-    public name: string = 'module';
+    static moduleName: string = 'module';
 
     constructor(public config: EnvArgs, public dependencies: ModuleDependencies) {}
 
