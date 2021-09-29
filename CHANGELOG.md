@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.4.1...v1.5.0) (2021-09-29)
+
+
+### Features
+
+* **balance:** Keep track of where the stake goes ([0643ce7](https://github.com/fluxprotocol/oracle-provider-core/commit/0643ce78935c11fc67a98b4ed2dffd89fae59101))
+
 ### [1.4.1](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.4.0...v1.4.1) (2021-08-31)
 
 
