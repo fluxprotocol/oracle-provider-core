@@ -1,5 +1,6 @@
 export enum ClaimError {
     AlreadyClaimed = 'AlreadyClaimed',
+    Slashed = 'Slashed',
     Unknown = 'Unknown',
 }
 

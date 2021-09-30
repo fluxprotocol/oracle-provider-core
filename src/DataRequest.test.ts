@@ -1,8 +1,9 @@
 import createDummyDataRequest from "./utils/dataRequest";
-import { calcStakeAmount, getCurrentResolutionWindow, isRequestClaimable, isRequestDeletable, mergeRequests } from "./DataRequest";
+import { calcStakeAmount, getCurrentResolutionWindow, isRequestClaimable, isRequestDeletable, isRequestFinalizable, mergeRequests } from "./DataRequest";
 import { OutcomeType } from "./Outcome";
 import { StakeResultType } from "./StakeResult";
 import { toToken } from "./Token";
+import { ExecuteResultType } from "./ExecuteResult";
 
 
 describe('DataRequest', () => {
@@ -475,6 +476,37 @@ describe('DataRequest', () => {
             });
 
             expect(isRequestClaimable(request)).toBe(false);
+        });
+    });
+
+    describe('isRequestFinalizable', () => {
+        it('should be finalised when possible', () => {
+            const request = createDummyDataRequest({
+                resolutionWindows: [
+                {
+                    bondSize: '2',
+                    endTime: new Date(new Date().getTime() - 10000),
+                    round: 0,
+                    bondedOutcome: {
+                        type: OutcomeType.Invalid,
+                    },
+                },{
+                    bondSize: '4',
+                    endTime: new Date(new Date().getTime() - 100),
+                    round: 1,
+                    bondedOutcome: undefined
+                }],
+                executeResult: {
+                    type: ExecuteResultType.Error,
+                    status: 1,
+                    error: '',
+                },
+                staking: [],
+            });
+
+            const result = isRequestFinalizable(request);
+
+            expect(result).toBe(true);
         });
     });
 });

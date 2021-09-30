@@ -82,6 +82,51 @@ export function calcStakeAmount(request: DataRequest, balance: string, maxAmount
     return stakeAmount.toString();
 }
 
+export function isRequestFinalizable(request: DataRequest) {
+    const currentWindow = getCurrentResolutionWindow(request);
+
+    if (!currentWindow) {
+        return false;
+    }
+
+    if (request.finalizedOutcome) {
+        return false;
+    }
+
+    if (request.finalArbitratorTriggered) {
+        return false;
+    }
+
+    // Atleast one window must be bonded
+    if (request.resolutionWindows.length < 2) {
+        return false;
+    }
+
+    // Our node has to atleast try if it can dispute it.
+    // We assume that if it was executed that the node tries to execute it and immidiatly stake
+    if (!request.executeResult) {
+        return false;
+    }
+
+    const previousWindow = request.resolutionWindows[request.resolutionWindows.length - 2];
+
+    // We don't agree with the bonded outcome
+    // We give the node a chance to dispute it so we don't finalize
+    if (previousWindow?.bondedOutcome) {
+        if (!isOutcomesEqual(getRequestOutcome(request), previousWindow.bondedOutcome)) {
+            return false;
+        }
+    }
+
+    const now = new Date();
+
+    if (now.getTime() >= new Date(currentWindow.endTime).getTime()) {
+        return true;
+    }
+    
+    return false;
+}
+
 /**
  * Checks if the data request can be finalized and claimed
  *
@@ -106,7 +151,6 @@ export function isRequestClaimable(request: DataRequest): boolean {
     }
 
     // Window 0 must be bonded
-    // This makes some things fail...
     if (request.resolutionWindows.length < 2) {
         return false;
     }
