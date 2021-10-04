@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.5.0...v1.6.0) (2021-10-04)
+
+
+### Features
+
+* **request:** Add support for checking if a request can be finalized ([d6c7cd8](https://github.com/fluxprotocol/oracle-provider-core/commit/d6c7cd868a9d944a36ea299ccffe447b98a79a24))
+
 ## [1.5.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.4.1...v1.5.0) (2021-09-29)
 
 
