@@ -315,12 +315,12 @@ describe('DataRequest', () => {
     });
 
     describe('isDeletable', () => {
-        it('should return true when the final arbitrator has been triggered', () => {
+        it('should return false when the final arbitrator has been triggered', () => {
             const request = createDummyDataRequest({
                 finalArbitratorTriggered: true,
             });
 
-            expect(isRequestDeletable(request)).toBe(true);
+            expect(isRequestDeletable(request)).toBe(false);
         });
 
         it('should return true when the request was already claimed and a finalized outcome is there', () => {

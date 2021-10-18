@@ -155,6 +155,10 @@ export function isRequestClaimable(request: DataRequest): boolean {
         return false;
     }
 
+    if (request.finalizedOutcome) {
+        return true;
+    }
+
     const now = new Date();
 
     if (now.getTime() >= new Date(currentWindow.endTime).getTime()) {
@@ -173,10 +177,6 @@ export function isRequestClaimable(request: DataRequest): boolean {
  */
 export function isRequestDeletable(request: DataRequest): boolean {
     if (request.claimedAmount) {
-        return true;
-    }
-
-    if (request.finalArbitratorTriggered) {
         return true;
     }
 
