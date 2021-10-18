@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.6.0...v1.6.1) (2021-10-18)
+
+
+### Bug Fixes
+
+* **request:** Fix issue where final arbitrator requests would not auto-claim ([7dc21bc](https://github.com/fluxprotocol/oracle-provider-core/commit/7dc21bca2f2221c77152d941becd09c1606ffd6f))
+
 ## [1.6.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.5.0...v1.6.0) (2021-10-04)
 
 
