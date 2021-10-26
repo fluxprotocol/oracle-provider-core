@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.6.1...v1.7.0) (2021-10-26)
+
+
+### Features
+
+* **provider:** Add logger as required dependency ([6c7f1f0](https://github.com/fluxprotocol/oracle-provider-core/commit/6c7f1f0a66ae937f941ae99289a8ac4af5d21746))
+
 ### [1.6.1](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.6.0...v1.6.1) (2021-10-18)
 
 
