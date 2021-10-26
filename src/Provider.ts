@@ -1,6 +1,6 @@
 import Balance from './Balance';
 import { ClaimResult } from './ClaimResult';
-import { IDatabase } from './Core';
+import { IDatabase, ILogger } from './Core';
 import DataRequest from './DataRequest';
 import { Outcome } from './Outcome';
 import { StakeResult } from './StakeResult';
@@ -11,6 +11,7 @@ export interface EnvArgs {
 
 export interface ProviderDependencies {
     database: IDatabase;
+    logger: ILogger;
 }
 
 export default interface Provider {
