@@ -35,6 +35,8 @@ export default interface DataRequest {
     config: RequestConfig;
     metadata?: string;
     paidFee?: string;
+    tags: string[];
+    requester: string;
 }
 
 export function getCurrentResolutionWindow(request: DataRequest) {
