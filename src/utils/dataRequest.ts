@@ -17,5 +17,7 @@ export default function createDummyDataRequest(request: Partial<DataRequest>): D
             ...request.config,
         },
         ...request,
+        requester: '',
+        tags: [],
     }
 }
