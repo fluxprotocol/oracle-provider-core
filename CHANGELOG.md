@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.7.0...v1.8.0) (2021-11-08)
+
+
+### Features
+
+* **request:** Add tags and requester ([eda6382](https://github.com/fluxprotocol/oracle-provider-core/commit/eda6382fd9e1e3229e83f4e8fc218c9e35b291d7))
+
 ## [1.7.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.6.1...v1.7.0) (2021-10-26)
 
 
