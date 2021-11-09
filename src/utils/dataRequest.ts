@@ -16,8 +16,9 @@ export default function createDummyDataRequest(request: Partial<DataRequest>): D
             validityBond: '0',
             ...request.config,
         },
-        ...request,
+        requiredEnvVariables: [],
         requester: '',
         tags: [],
+        ...request,
     }
 }

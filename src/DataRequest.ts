@@ -8,6 +8,8 @@ import clampBig from "./utils/clampBig";
 
 Big.PE = 100_000;
 
+export const VM_ENV_KEY = 'VM_ENV_';
+
 export interface RequestInfo {
     end_point: string;
     source_path: string;
@@ -32,6 +34,7 @@ export default interface DataRequest {
     finalizedOutcome?: Outcome;
     claimedAmount?: string;
     dataType: DataRequestDataType;
+    requiredEnvVariables: string[];
     config: RequestConfig;
     metadata?: string;
     paidFee?: string;
@@ -189,13 +192,23 @@ export function isRequestDeletable(request: DataRequest): boolean {
     return false;
 }
 
-export function isRequestExecutable(request: DataRequest) {
-    // For now a request is always executable
-    // Can implement settlement times later..
+export function isRequestExecutable(request: DataRequest): boolean {
+    // Requests that required certain api keys or env variables should only be
+    // executed when we have those configured
+    if (request.requiredEnvVariables.length) {
+        for (let index = 0; index < request.requiredEnvVariables.length; index++) {
+            const required = request.requiredEnvVariables[index];
+
+            if (!process.env[`${VM_ENV_KEY}${required}`]) {
+                return false;
+            }
+        }
+    }
+
     return true;
 }
 
-export function buildInternalId(id: string, provider: string, contract: string) {
+export function buildInternalId(id: string, provider: string, contract: string): string {
     return `${id}_${provider}_${contract}`;
 }
 
