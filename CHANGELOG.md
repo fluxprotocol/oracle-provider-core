@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/fluxprotocol/oracle-provider-core/compare/v2.0.0...v2.0.1) (2021-11-22)
+
+
+### Bug Fixes
+
+* **claiming:** Fix issue where claiming was not possible ([bd230d0](https://github.com/fluxprotocol/oracle-provider-core/commit/bd230d06520d2371e3d6919805b5be110f8857d3))
+
 ## [2.0.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.9.0...v2.0.0) (2021-11-22)
 
 
