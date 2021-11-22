@@ -8,6 +8,8 @@ export enum StakeError {
     TransactionFailure = 'TransactionFailure',
     NotExecuted = 'NotExecuted',
     FinalArbitratorTriggered = 'FinalArbitratorTriggered',
+    NotWhitelisted = 'NotWhitelisted',
+    FirstPartyRequest = 'FirstPartyRequest',
 }
 
 export enum StakeResultType {

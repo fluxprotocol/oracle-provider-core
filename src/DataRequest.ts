@@ -40,6 +40,7 @@ export default interface DataRequest {
     paidFee?: string;
     tags: string[];
     requester: string;
+    allowedValidators: string[];
 }
 
 export function getCurrentResolutionWindow(request: DataRequest) {
@@ -87,7 +88,19 @@ export function calcStakeAmount(request: DataRequest, balance: string, maxAmount
     return stakeAmount.toString();
 }
 
-export function isRequestFinalizable(request: DataRequest) {
+export function isRequestFinalizable(request: DataRequest, validatorId: string) {
+    if (request.allowedValidators.length && request.allowedValidators.includes(validatorId)) {
+        if (request.executeResult) {
+            return true;
+        }
+
+        return false;
+    }
+
+    if (request.allowedValidators.length) {
+        return false;
+    }
+    
     const currentWindow = getCurrentResolutionWindow(request);
 
     if (!currentWindow) {
@@ -228,7 +241,21 @@ export interface CanStakeResponse {
     reason?: StakeError;
 }
 
-export function canStakeOnRequest(request: DataRequest): CanStakeResponse {
+export function canStakeOnRequest(request: DataRequest, validatorId: string): CanStakeResponse {
+    if (request.allowedValidators.length && !request.allowedValidators.includes(validatorId)) {
+        return {
+            canStake: false,
+            reason: StakeError.NotWhitelisted,
+        }
+    }
+
+    if (request.allowedValidators.length && request.allowedValidators.includes(validatorId)) {
+        return {
+            canStake: false,
+            reason: StakeError.FirstPartyRequest,
+        };
+    }
+
     if (request.finalArbitratorTriggered) {
         return {
             canStake: false,

@@ -504,7 +504,7 @@ describe('DataRequest', () => {
                 staking: [],
             });
 
-            const result = isRequestFinalizable(request);
+            const result = isRequestFinalizable(request, 'test.near');
 
             expect(result).toBe(true);
         });

@@ -19,6 +19,7 @@ export default function createDummyDataRequest(request: Partial<DataRequest>): D
         requiredEnvVariables: [],
         requester: '',
         tags: [],
+        allowedValidators: [],
         ...request,
     }
 }

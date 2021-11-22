@@ -21,6 +21,7 @@ export interface IProviderRegistry {
     activeProviders: string[];
 
     getProviderById(id: string): Provider | undefined;
+    getAccountIdByProvider(providerId: string): string;
     init(): Promise<void>;
     getBalanceInfo(providerId: string): Promise<Balance>;
     listenForRequests(onRequests: (requests: DataRequest[], providerId: string) => void): void;

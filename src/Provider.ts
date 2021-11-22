@@ -21,6 +21,7 @@ export default interface Provider {
     init(): Promise<void>;
 
     getBalanceInfo(): Promise<Balance>;
+    getAccountId(): string;
     getDataRequestById(requestId: string): Promise<DataRequest | undefined>;
     listenForRequests(onRequests: (requests: DataRequest[]) => void): void;
 
