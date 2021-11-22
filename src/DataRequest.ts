@@ -153,12 +153,6 @@ export function isRequestFinalizable(request: DataRequest, validatorId: string) 
  * @return {boolean}
  */
 export function isRequestClaimable(request: DataRequest): boolean {
-    const currentWindow = getCurrentResolutionWindow(request);
-
-    if (!currentWindow) {
-        return false;
-    }
-
     // When we have nothing to stake we can not claim
     if (request.staking.length === 0) {
         return false;
@@ -168,18 +162,7 @@ export function isRequestClaimable(request: DataRequest): boolean {
         return false;
     }
 
-    // Window 0 must be bonded
-    if (request.resolutionWindows.length < 2) {
-        return false;
-    }
-
     if (request.finalizedOutcome) {
-        return true;
-    }
-
-    const now = new Date();
-
-    if (now.getTime() >= new Date(currentWindow.endTime).getTime()) {
         return true;
     }
 

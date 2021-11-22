@@ -239,33 +239,6 @@ describe('DataRequest', () => {
             expect(isRequestClaimable(request)).toBe(false);
         });
 
-        it('should be claimable when the current date exceeds the end time', () => {
-            const request = createDummyDataRequest({
-                staking: [{
-                    amount: '1',
-                    roundId: 0,
-                    type: StakeResultType.Success,
-                }],
-                resolutionWindows: [{
-                    bondSize: '2',
-                    endTime: new Date(1),
-                    round: 0,
-                    bondedOutcome: {
-                        type: OutcomeType.Invalid,
-                    },
-                },{
-                    bondSize: '4',
-                    endTime: new Date(1),
-                    round: 1,
-                    bondedOutcome: {
-                        type: OutcomeType.Invalid,
-                    },
-                }],
-            });
-
-            expect(isRequestClaimable(request)).toBe(true);
-        });
-
         it('should not be claimable as a default', () => {
             const request = createDummyDataRequest({
                 staking: [{
@@ -429,33 +402,6 @@ describe('DataRequest', () => {
             });
 
             expect(isRequestClaimable(request)).toBe(false);
-        });
-
-        it('should be claimable when the current date exceeds the end time', () => {
-            const request = createDummyDataRequest({
-                staking: [{
-                    amount: '1',
-                    roundId: 0,
-                    type: StakeResultType.Success,
-                }],
-                resolutionWindows: [{
-                    bondSize: '2',
-                    endTime: new Date(1),
-                    round: 0,
-                    bondedOutcome: {
-                        type: OutcomeType.Invalid,
-                    },
-                }, {
-                    bondSize: '4',
-                    endTime: new Date(1),
-                    round: 1,
-                    bondedOutcome: {
-                        type: OutcomeType.Invalid,
-                    },
-                }],
-            });
-
-            expect(isRequestClaimable(request)).toBe(true);
         });
 
         it('should not be claimable as a default', () => {
