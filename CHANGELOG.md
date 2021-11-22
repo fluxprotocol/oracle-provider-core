@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.9.0...v2.0.0) (2021-11-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **protocol:** Protocol changes
+
+### Features
+
+* **protocol:** Add support for first party oracles ([02fcfe4](https://github.com/fluxprotocol/oracle-provider-core/commit/02fcfe48a51f3ef3f7468ce6dd50e050eb7acc69))
+
 ## [1.9.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v1.8.0...v1.9.0) (2021-11-09)
 
 
