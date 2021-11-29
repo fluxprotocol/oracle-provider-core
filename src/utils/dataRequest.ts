@@ -14,6 +14,7 @@ export default function createDummyDataRequest(request: Partial<DataRequest>): D
         config: {
             paidFee: '0',
             validityBond: '0',
+            minResolutionBond: '100000000000000000000',
             ...request.config,
         },
         requiredEnvVariables: [],

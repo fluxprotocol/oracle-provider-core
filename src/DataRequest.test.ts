@@ -14,13 +14,14 @@ describe('DataRequest', () => {
                 resolutionWindows: [],
                 config: {
                     paidFee: '0',
-                    validityBond: '0'
+                    validityBond: '0',
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
             const amount = calcStakeAmount(request, toToken('10', 24), toToken('8', 24));
 
-            expect(amount).toBe('1');
+            expect(amount).toBe('200000000000000000000');
         });
 
         it('Should give back 0 if the balance is 0', () => {
@@ -28,7 +29,8 @@ describe('DataRequest', () => {
                 resolutionWindows: [],
                 config: {
                     paidFee: '0',
-                    validityBond: '5000000000000000000000000'
+                    validityBond: '5000000000000000000000000',
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -42,7 +44,8 @@ describe('DataRequest', () => {
                 resolutionWindows: [],
                 config: {
                     paidFee: '0',
-                    validityBond: '5000000000000000000000000'
+                    validityBond: '5000000000000000000000000',
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -56,7 +59,8 @@ describe('DataRequest', () => {
                 resolutionWindows: [],
                 config: {
                     paidFee: '0',
-                    validityBond: '5000000000000000000000000'
+                    validityBond: '5000000000000000000000000',
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -70,7 +74,8 @@ describe('DataRequest', () => {
                 resolutionWindows: [],
                 config: {
                     paidFee: '0',
-                    validityBond: '1000000000000000000000000'
+                    validityBond: '1000000000000000000000000',
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -86,6 +91,7 @@ describe('DataRequest', () => {
                     paidFee: '0',
                     validityBond: '1000000000000000000000000',
                     stakeMultiplier: 10_500, // 105%
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -100,6 +106,7 @@ describe('DataRequest', () => {
                 config: {
                     paidFee: '2000000000000000000000000',
                     validityBond: '1000000000000000000000000',
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -123,6 +130,7 @@ describe('DataRequest', () => {
                 config: {
                     paidFee: '0',
                     validityBond: toToken('1', 24),
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 
@@ -146,6 +154,7 @@ describe('DataRequest', () => {
                 config: {
                     paidFee: '0',
                     validityBond: toToken('1', 24),
+                    minResolutionBond: '100000000000000000000',
                 },
             });
 

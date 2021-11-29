@@ -19,6 +19,7 @@ export interface RequestConfig {
     validityBond: string;
     paidFee: string;
     stakeMultiplier?: number;
+    minResolutionBond: string;
 }
 
 export default interface DataRequest {
@@ -52,6 +53,10 @@ export function calcWindowBondSize(requestConfig: RequestConfig): string {
 
     if (new Big(requestConfig.paidFee).gte(requestConfig.validityBond)) {
         bond_size = new Big(requestConfig.paidFee);
+    }
+
+    if (bond_size.lt(requestConfig.minResolutionBond)) {
+        bond_size = new Big(requestConfig.minResolutionBond);
     }
 
     // Use the multiplier according to multiply_stake in the oracle
