@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/fluxprotocol/oracle-provider-core/compare/v2.0.1...v2.0.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* **calcStakeAmount:** Fix issue where first window bondsize was calculated wrongly ([fccaf1c](https://github.com/fluxprotocol/oracle-provider-core/commit/fccaf1c1d17c1738d97ff2a4b3a84feccee17b5f))
+
 ### [2.0.1](https://github.com/fluxprotocol/oracle-provider-core/compare/v2.0.0...v2.0.1) (2021-11-22)
 
 
