@@ -13,6 +13,11 @@ export const VM_ENV_KEY = 'VM_ENV_';
 export interface RequestInfo {
     end_point: string;
     source_path: string;
+    http_method: string;
+    http_headers?: {
+        [key: string]: string;
+    }
+    http_body?: string;
 }
 
 export interface RequestConfig {
