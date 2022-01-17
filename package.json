@@ -1,6 +1,6 @@
 {
   "name": "@fluxprotocol/oracle-provider-core",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Core components for the Flux Oracle",
   "files": [
     "dist/**/*"
