@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/fluxprotocol/oracle-provider-core/compare/v2.0.2...v2.1.0) (2022-01-17)
+
+
+### Features
+
+* **request:** Support for http headers and methods ([7cd43aa](https://github.com/fluxprotocol/oracle-provider-core/commit/7cd43aa47cc079f983a6757bb49205e5514dabaf))
+
+
+### Bug Fixes
+
+* **outcome:** Fix issue where outcomes where not taken into account ([c5eb89f](https://github.com/fluxprotocol/oracle-provider-core/commit/c5eb89f9684da0dfcd0d1d66bef906ad86826724))
+
 ### [2.0.2](https://github.com/fluxprotocol/oracle-provider-core/compare/v2.0.1...v2.0.2) (2021-11-29)
 
 
