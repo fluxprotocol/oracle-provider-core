@@ -48,6 +48,16 @@ export function getRequestOutcome(dataRequest: DataRequest): Outcome {
         };
     }
 
+    if (dataRequest.outcomes.length) {
+        const isInOutcomes = dataRequest.outcomes.includes(result.data);
+    
+        if (!isInOutcomes) {
+            return {
+                type: OutcomeType.Invalid,
+            }
+        }
+    }
+
     return {
         type: OutcomeType.Answer,
         answer: result.data,
