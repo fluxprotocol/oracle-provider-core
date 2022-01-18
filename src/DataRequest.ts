@@ -10,15 +10,18 @@ Big.PE = 100_000;
 
 export const VM_ENV_KEY = 'VM_ENV_';
 
+export interface HttpInstructions {
+    http_headers: {
+        [key: string]: string;
+    };
+    http_body?: string;
+}
+
 export interface RequestInfo {
     end_point: string;
     source_path: string;
     multiplier?: string;
-    http_method: string;
-    http_body?: string;
-    http_headers?: {
-        [key: string]: string;
-    }
+    http_instructions?: HttpInstructions;
 }
 
 export interface RequestConfig {
